@@ -5,7 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   let product=[{name:"iphone 15 prox",
                 category:"phone case",
-                price:"10 CAD"
+                price:"10 CAD",
+                image:"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRfztewwfpbqL71Pt0l3w8CaeqpOOQakp6H1gU-deaIMPogS2xrs3vyDfBx_Vc9EHK9EB0ZHtTugvl6QWHjkiyPIy5egMlTEEXgmkFWUWGcSVMkYAYCAgkd6A&usqp=CAE"
 
   },{name:"i phone 13 pro",
 category:"phone case",
