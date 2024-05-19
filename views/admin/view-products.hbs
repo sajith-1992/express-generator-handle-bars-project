@@ -1,0 +1,26 @@
+<div class="conatainer">
+    <div class="row " >
+      <a href="" class="btn btn-success ml-auto"  style="width:200px; height: 50px;">add-product</a>
+    </div>
+    {{#each product}}
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">name</th>
+      <th scope="col"> category</th>
+      <th scope="col"> price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td>{{this.name}}</td>
+      <td>{{this.price}}</td>
+      <td>{{this.category}}</td>
+    </tr>
+    
+  </tbody>
+</table>
+{{/each}}
+</div>
