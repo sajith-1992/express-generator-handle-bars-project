@@ -28,5 +28,9 @@ image:"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRfztewwfpbqL71Pt0
 }]
   res.render('admin/view-products',{product,admin:true});
 });
+router.get('/add-product',(req,res,next)=>{
+  res.render("admin/add-product",{admin:true})
+})
 
 module.exports = router;
+
