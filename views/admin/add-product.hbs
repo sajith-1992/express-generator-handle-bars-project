@@ -1,19 +1,28 @@
-<table>
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">name</th>
-      <th scope="col"> category</th>
-      <th scope="col"> price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row"></th>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    
-  </tbody>
-</table>
+<div class="container">
+ <div class="row ">
+     <form action="/admin/add-product" enctype="multipart/form-data" method="post">
+  <div class="form-group">
+    <label for="product-name">Name of the product</label>
+    <input type="text" name="name" class="form-control" id="name"  placeholder="Enter name of the product">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="category">category</label>
+    <input type="text" class="form-control" name="category" id="category" placeholder="category">
+  </div>
+   <div class="form-group">
+    <label for="price">price</label>
+    <input type="text" name="price" class="form-control" name="price" id="price" placeholder="price">
+  </div>
+  <div class="form-group">
+   <label>Image</label>
+   <br>
+  <input   type="file"  alt="productimage" name="fileupload" >
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+ </div>
+
+</div>

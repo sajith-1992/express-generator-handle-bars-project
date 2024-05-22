@@ -28,8 +28,16 @@ image:"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRfztewwfpbqL71Pt0
 }]
   res.render('admin/view-products',{product,admin:true});
 });
-router.get('/add-product',(req,res,next)=>{
+router.get('/add-product',(req,res)=>{
   res.render("admin/add-product",{admin:true})
+})
+router.post('/add-product',function(req,res){
+  console.log(req.body)
+  console.log(req.files) 
+  res.redirect('add-product')
+  
+  
+  
 })
 
 module.exports = router;
