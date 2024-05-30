@@ -38,7 +38,7 @@ router.post('/add-product',function(req,res){
   
   
   
-})
+}) 
 
 module.exports = router;
 
