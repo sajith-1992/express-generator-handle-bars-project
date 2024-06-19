@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload())
 db.connect((err)=>{
   if(err) console.log(" connection error"+err);
-  console.log("connected to data base ")
+  else console.log("connected to data base ")
 })
 app.use('/', usersRouter);
 app.use('/admin', adminRouter);

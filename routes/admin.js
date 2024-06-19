@@ -33,10 +33,13 @@ router.get('/add-product',(req,res)=>{
   res.render("admin/add-product",{admin:true})
 })
 router.post('/add-product',function(req,res){
-  console.log(req.body)
-  console.log(req.files) 
-  res.redirect('add-product')
-  productHelper.addProducts(req.body)
+  //console.log(req.body)
+  //console.log(req.files) 
+  
+  productHelper.addProducts(req.body,(result)=>{
+    console.log(result)
+    res.render("/admin/products")
+  })
   
   
   
