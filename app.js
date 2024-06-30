@@ -27,10 +27,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload())
-db.connect((err)=>{
-  if(err) console.log(" connection error"+err);
-  else console.log("connected to data base ")
-})
+
+db.connect((err)=>{if (err)
+  console.log("connection err "+err);
+   else console.log("connected to port 2017")})
+  
 app.use('/', usersRouter);
 app.use('/admin', adminRouter);
 

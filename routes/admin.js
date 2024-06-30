@@ -37,8 +37,8 @@ router.post('/add-product',function(req,res){
   //console.log(req.files) 
   
   productHelper.addProducts(req.body,(result)=>{
-    console.log(result)
-    res.render("/admin/products")
+    
+    res.render("/admin/product")
   })
   
   

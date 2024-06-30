@@ -1,4 +1,4 @@
-const MongoClient = require("mongodb").MongoClient
+const mongoClient = require("mongodb").MongoClient
 const state={
     db:null
 }
@@ -6,17 +6,20 @@ const state={
 module.exports.connect=  function(done){
     const url='mongodb://0.0.0.0:27017'
   const dbname= "shoppingcart"
-
- MongoClient.connect(url,{useUnifiedTopology:true},(err,data)=>{
-    if(err) return done (err)
-    state.db=data.db(dbname)
-            done()
-
-        }
+  mongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+    if (err) {
+        console.error('Error connecting to database:', err);
+    } else {
+        state.db = client.db(dbname);
+        console.log('Connected to database successfully');
+    }
+});
     
 
-)}
+}
 
-module.exports.get=function(){
-    state.db
+module.exports.get = function(){
+     return state.db
+    
+    
 }
