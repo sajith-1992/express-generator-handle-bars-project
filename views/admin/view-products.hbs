@@ -4,27 +4,33 @@
 
 </div>
    <div>
-    {{#each product}}
+    
 <table class="table table-dark">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">name</th>
-      <th scope="col"> category</th>
-      <th scope="col"> price</th>
+      <th scope="col">Name</th>
+      <th scope="col">Category</th>
+      <th scope="col"> Price</th>
+      <th scope="col">Image </th>
+
     </tr>
   </thead>
+   {{#each allProducts}}
   <tbody>
+    
     <tr>
       <th scope="row"></th>
       <td>{{this.name}}</td>
+      <td>{{this.category}}</td>
       <td>{{this.price}}</td>
-      <td>{{this.category}}</td>
-      <td>{{this.category}}</td>
+      <td><img src="/product_images/{{this._id}}.jpg" width="50" height="50" ></td>
+      
     </tr>
     
   </tbody>
+  {{/each}}
 </table>
-{{/each}}
+
    </div>
 </div>
