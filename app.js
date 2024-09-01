@@ -9,6 +9,8 @@ var usersRouter = require('./routes/user');
 const hbs = require('express-handlebars');
 var fileUpload = require('express-fileupload')
 var db =require("./Configuration/connection")
+var session = require('express-session')
+const nocache=require('nocache')
 
 var app = express();
 
@@ -27,6 +29,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload())
+app.use(session({secret:'key',resave: false,
+  saveUninitialized: true,cookie:{maxAge:60000}}))
+app.use(nocache ())
 
 db.connect((err)=>{if (err)
   console.log("connection err "+err);

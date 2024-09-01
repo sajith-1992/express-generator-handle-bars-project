@@ -6,14 +6,23 @@ var userHelper = require("../helpers/userHelper");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   productHelper.getAllProducts().then((allProducts) => {
-    console.log(allProducts);
-    res.render("./user/view_products", { allProducts, admin: false });
+    //console.log(allProducts);
+    let user= req.session.user
+    //console.log(user)
+    res.render("./user/view_products", { allProducts , user:user });
   });
 });
 
 router.get("/signin", (req, res) => {
   // console.log('Sign In route hit');
-  res.render("user/signin");
+  console.log("hello");
+  console.log(req.session.loggedIn);
+  if(req.session.loggedIn){
+    res.redirect('/')
+  }else
+  
+
+  {res.render("user/signin",{"error":req.session.loginEror})};
 });
 router.get("/signup", (req, res) => {
   res.render("user/signup");
@@ -24,14 +33,25 @@ router.post("/signup", (req, res) => {
   });
 });
 router.post("/signin", (req, res) => {
+  console.log("hello this post method")
   userHelper.dosignin(req.body).then((response)=>{
+    
     if (response.status){
+      req.session.loggedIn=true
+      console.log
+      req.session.user= response.user
+     
      res.redirect('/')
     }
     else{
+      req.sesssion.loginEror=true
       res.redirect('/signin')
     }
   })
-});
+})
+router.get('/signout',(req,res)=>{
+  req.session.distroy()
+})
+
 
 module.exports = router;
