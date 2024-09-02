@@ -22,7 +22,9 @@ router.get("/signin", (req, res) => {
   }else
   
 
-  {res.render("user/signin",{"error":req.session.loggedError})};
+  {res.render("user/signin",{"error":req.session.loggedError})
+  req.seesin.loggedError=false}
+   ;
 });
 router.get("/signup", (req, res) => {
   res.render("user/signup");
