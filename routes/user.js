@@ -22,7 +22,7 @@ router.get("/signin", (req, res) => {
   }else
   
 
-  {res.render("user/signin",{"error":req.session.loginEror})};
+  {res.render("user/signin",{"error":req.session.loggedError})};
 });
 router.get("/signup", (req, res) => {
   res.render("user/signup");
@@ -44,13 +44,14 @@ router.post("/signin", (req, res) => {
      res.redirect('/')
     }
     else{
-      req.sesssion.loginEror=true
+      req.session.loggedError = true
       res.redirect('/signin')
     }
   })
 })
 router.get('/signout',(req,res)=>{
-  req.session.distroy()
+  req.session.destroy()
+  res.redirect('/')
 })
 
 
