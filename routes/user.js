@@ -15,7 +15,7 @@ router.get("/", function (req, res, next) {
 
 router.get("/signin", (req, res) => {
   // console.log('Sign In route hit');
-  console.log("hello");
+  //console.log("hello");
   console.log(req.session.loggedIn);
   if(req.session.loggedIn){
     res.redirect('/')
@@ -35,18 +35,18 @@ router.post("/signup", (req, res) => {
   });
 });
 router.post("/signin", (req, res) => {
-  console.log("hello this post method")
+  //console.log("hello this post method")
   userHelper.dosignin(req.body).then((response)=>{
     
     if (response.status){
       req.session.loggedIn=true
-      console.log
+      
       req.session.user= response.user
      
      res.redirect('/')
     }
     else{
-      req.session.loggedError = true
+      req.session.loggedError ="invalid username or password"
       res.redirect('/signin')
     }
   })
