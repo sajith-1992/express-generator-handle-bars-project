@@ -29,5 +29,8 @@ router.post("/add-product", function (req, res) {
     });
   });
 });
+router.get('/delete',(req,res)=>{
+  productHelper.delete()
+})
 
 module.exports = router;

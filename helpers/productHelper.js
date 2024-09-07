@@ -20,5 +20,9 @@ module.exports = {
         .toArray();
       resolve(allProducts);
     });
-  },
+  },delete:()=>{
+    return new Promise((resolve, reject) => {
+        db.get().collection(collection.PRODUCT_COLLECTION).deleteOne()
+    })
+  }
 };
