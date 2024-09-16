@@ -29,7 +29,9 @@ router.post("/add-product", function (req, res) {
     });
   });
 });
-router.get('/delete',(req,res)=>{
+router.get('/delete/:id',(req,res)=>{
+  let prodId=req.params.id
+  console.log(prodId)
   productHelper.delete()
 })
 
