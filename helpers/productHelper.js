@@ -20,9 +20,13 @@ module.exports = {
         .toArray();
       resolve(allProducts);
     });
-  },delete:()=>{
+  },deleteproduct:(prodId)=>{
     return new Promise((resolve, reject) => {
-        db.get().collection(collection.PRODUCT_COLLECTION).deleteOne()
+        db.get().collection(collection.PRODUCT_COLLECTION).deleteOne({_id:prodId}).then(()=>{
+          resolve(prodId)
+        })
     })
-  }
+  },
+ 
+
 };

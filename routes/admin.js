@@ -29,10 +29,11 @@ router.post("/add-product", function (req, res) {
     });
   });
 });
-router.get('/delete/:id',(req,res)=>{
-  let prodId=req.params.id
-  console.log(prodId)
-  productHelper.delete()
-})
+router.get('/delete/', (req, res) => {
+  //let prodId = req.query.id; // Access the 'id' query parameter
+  console.log(prodId); // This should now log the correct ID
+
+  productHelper.deleteproduct(prodId)})
+  
 
 module.exports = router;
