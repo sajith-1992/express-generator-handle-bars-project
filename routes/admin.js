@@ -5,7 +5,7 @@ var productHelper = require("../helpers/productHelper");
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   productHelper.getAllProducts().then((allProducts) => {
-    console.log(allProducts);
+   // console.log(allProducts);
     res.render("admin/view-products", { allProducts, admin: true });
   });
 });
@@ -29,11 +29,17 @@ router.post("/add-product", function (req, res) {
     });
   });
 });
-router.get('/delete/', (req, res) => {
-  //let prodId = req.query.id; // Access the 'id' query parameter
-  console.log(prodId); // This should now log the correct ID
+router.get('/delete/:id', (req, res) => {
+let prodId = req.params.id; // Access the 'id' query parameter
+ // console.log(prodId); // This should now log the correct ID
 
-  productHelper.deleteproduct(prodId)})
+  productHelper.deleteproduct(prodId).then((response)=>{
+   console.log(response
+
+   )
+    console.log("sajith")
+    res.redirect('/admin/')
+  })})
   
 
 module.exports = router;
