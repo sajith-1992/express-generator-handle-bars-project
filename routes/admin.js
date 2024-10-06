@@ -30,7 +30,7 @@ router.post("/add-product", function (req, res) {
   });
 });
 router.get('/delete/:id', (req, res) => {
-let prodId = req.params.id; // Access the 'id' query parameter
+let prodId = req.params.id // Access the 'id' query parameter
  // console.log(prodId); // This should now log the correct ID
 
   productHelper.deleteproduct(prodId).then((response)=>{
