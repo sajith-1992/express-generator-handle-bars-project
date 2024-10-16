@@ -13,16 +13,16 @@ router.get("/add-product", (req, res) => {
   res.render("admin/add-product", { admin: true });
 });
 router.post("/add-product", function (req, res) {
-  //console.log(req.body)
+  console.log(req.body)
   //console.log(req.files)
 
   productHelper.addProducts(req.body, (id) => {
-    console.log(id);
+     console.log(id);
     let image = req.files.Image;
     console.log(image);
     image.mv("./public/product_images/" + id + ".jpg", (err, done) => {
       if (!err) {
-        res.render("./admin/add-Product");
+        res.render( "./admin/add-Product");
       } else {
         console.log(err);
       }
@@ -34,12 +34,26 @@ let prodId = req.params.id // Access the 'id' query parameter
  // console.log(prodId); // This should now log the correct ID
 
   productHelper.deleteproduct(prodId).then((response)=>{
-   console.log(response
-
-   )
+  // console.log(response)
     console.log("sajith")
     res.redirect('/admin/')
   })})
+  router.get('/edit/:id',async(req,res)=>{
+    console.log(req.params.id)
+    let product = await productHelper.getProductDetails(req.params.id)
+    console.log(product)
+    //console.log("hellooo")
+
+    res.render('./admin/edit-product',{product})
+      
+      
+    })
+  router.post('/update-product/:id', (req, res) => {
+    console.log("Updating product with ID:", req.params.id)
+    res.redirect('/admin/')
+    
+   
+  });
   
 
 module.exports = router;

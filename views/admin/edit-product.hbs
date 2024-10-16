@@ -1,0 +1,29 @@
+<div class="container">
+ <div class="row ">
+     <form action="/admin/update-product/{{product._id}}" enctype="multipart/form-data" method="post">
+  <div class="form-group">
+    <label for="product-name">Name of the product</label>
+    <input type="text" name="name" class="form-control" id="name"  value="{{product.name}}" placeholder="Enter name of the product">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="category">category</label>
+    <input type="text" class="form-control" name="category" id="category" value="{{product.category}}" placeholder="category">
+  </div>
+   <div class="form-group">
+    <label for="price">price</label>
+    <input type="text" name="price" class="form-control" value="{{product.price}}" name="price" id="price" placeholder="price">
+  </div>
+  <div class="form-group">
+   <label> Image </label>
+   <br>
+   <img src="/product_images/{{product._id}}.jpg"   style="width: 50px; height: 100px;"alt="">
+   <br>
+   <label>Image </label>
+  <input   type="file"  alt="productimage" name="Image" class="form-control"  >
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+ </div>
