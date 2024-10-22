@@ -49,7 +49,19 @@ let prodId = req.params.id // Access the 'id' query parameter
       
     })
   router.post('/update-product/:id', (req, res) => {
-    console.log("Updating product with ID:", req.params.id)
+   // console.log("Updating product with ID:", req.params.id)
+    productHelper.updateProduct(req.params.id,req.body).then(()=>{ 
+      let image = req.files.Image;
+      console.log(image);
+      image.mv("./public/product_images/" + req.params.id + ".jpg", (err, done) => {
+        if (!err) {
+          res.render( "./admin/add-Product");
+        } else {
+          console.log(err);
+        }
+      })
+
+    })
     res.redirect('/admin/')
     
    
