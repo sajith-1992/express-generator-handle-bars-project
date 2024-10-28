@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var productHelper = require("../helpers/productHelper");
 var userHelper = require("../helpers/userHelper");
-const verfyLogIn=(req,res,next)=>{
+const verifyLogIn=(req,res,next)=>{
   if(req.session.loggedIn){
     next()
   } else{
@@ -31,7 +31,7 @@ router.get("/signin", (req, res) => {
   
 
   {res.render("user/signin",{"error":req.session.loggedError})
-  req.seesin.loggedError=false}
+  req.session.loggedError=false}
    ;
 });
 router.get("/signup", (req, res) => {
@@ -40,6 +40,8 @@ router.get("/signup", (req, res) => {
 router.post("/signup", (req, res) => {
   userHelper.signup(req.body).then((response) => {
     //console.log(response)
+    req.session.loggedIn = true
+    req.session.user = response
   });
 });
 router.post("/signin", (req, res) => {
@@ -63,10 +65,14 @@ router.get('/signout',(req,res)=>{
   req.session.destroy()
   res.redirect('/')
 })
-router.get('/cart',verfyLogIn,(req,res)=>{
+router.get('/cart',verifyLogIn,(req,res)=>{
 
 
   res.render('user/cart')
+})
+
+router.get('/add-cart/:id',verifyLogIn,(req,res)=>{
+  userHelper.addToCart(req.params.id,req.session.user._id)
 })
 
 
