@@ -64,6 +64,40 @@ module.exports = {
       })
     }
     })
+  },
+   getuserproduct:(userId)=>{
+
+return new Promise((resolve, reject) => {
+  
+  let cartItems=db.get().collection(collection.CART_COLLECTION).aggregate([
+    { 
+      $match : {user: new ObjectId(userId)}
+    },
+    {
+      $lookup:{
+        from:collection.PRODUCT_COLLECTION,
+        let:{prolist:'$products'},
+        pipeline:[
+          {
+            $match:{
+              $expr:{
+                $in:['$_id',"$$prolist"]
+              }
+            }
+          }
+
+
+        ],as: 'cartItems'
+        
+        
+      }
+    }
+  ]).toArray()
+  resolve(cartItems)
+  
+})
+
   }
 
-}
+
+  }
