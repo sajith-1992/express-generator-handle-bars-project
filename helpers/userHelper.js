@@ -93,11 +93,16 @@ return new Promise((resolve, reject) => {
       }
     }
   ]).toArray()
-  resolve(cartItems)
-  
-})
-
-  }
-
-
-  }
+  .then(cartItems => {
+    // If no items are found in the cart for the user
+    if (cartItems.length > 0) {
+      resolve(cartItems[0].cartItems);
+    } else {
+      resolve([]); // Empty cart case
+    }
+  })
+  .catch(error => {
+    reject(error); // In case of any errors
+  });
+});
+}}
