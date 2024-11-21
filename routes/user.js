@@ -69,7 +69,7 @@ router.get('/cart',verifyLogIn,async(req,res)=>{
 
  let cartproduct= await userHelper.getuserproduct(req.session.user._id)
  console.log(cartproduct)
-  res.render('user/cart')
+  res.render('user/cart',{cartproduct,user:req.session.user})
 })
 
 router.get('/add-cart/:id',verifyLogIn,(req,res)=>{
