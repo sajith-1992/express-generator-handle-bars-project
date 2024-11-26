@@ -12,12 +12,19 @@ const verifyLogIn=(req,res,next)=>{
 
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
+router.get("/",async function (req, res, next) {
+
+
+  let user= req.session.user
+  let cartcount=null
+  if(req.session.user)
+  {cartcount= await userHelper.cartcount(req.session.user._id)}
+
   productHelper.getAllProducts().then((allProducts) => {
     //console.log(allProducts);
     let user= req.session.user
     //console.log(user)
-    res.render("./user/view_products", { allProducts , user:user });
+    res.render("./user/view_products", { allProducts , user:user ,cartcount});
   });
 });
 
@@ -72,9 +79,10 @@ router.get('/cart',verifyLogIn,async(req,res)=>{
   res.render('user/cart',{cartproduct,user:req.session.user})
 })
 
-router.get('/add-cart/:id',verifyLogIn,(req,res)=>{
+router.get('/add-cart/:proID',(req,res)=>{
+  console.log("onclick working")
   userHelper.addToCart(req.params.id,req.session.user._id).then(()=>{
-    res.redirect('/')
+    //res.redirect('/')
     
   })
 })

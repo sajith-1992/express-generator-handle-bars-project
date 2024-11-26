@@ -105,4 +105,19 @@ return new Promise((resolve, reject) => {
     reject(error); // In case of any errors
   });
 });
-}}
+},
+cartcount:(userID)=>{
+
+  return new Promise(async(resolve, reject) => {
+    let cart = await db.get().collection(collection.CART_COLLECTION).findOne({user: new ObjectId (userID)
+    })
+    let cartcount = 0
+    if (cart){
+
+      cartcount = cart.products.length
+
+    }
+    resolve(cartcount)
+  })
+}
+}
