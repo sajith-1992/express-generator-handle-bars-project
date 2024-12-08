@@ -39,17 +39,32 @@ module.exports = {
     });
   },
   addToCart:(proId,userId)=>{
+    let proObj={
+      item: new ObjectId(proId),
+      quantity:1
+    } 
     return new Promise(async(resolve, reject) => {
     let usercart = await db.get().collection(collection.CART_COLLECTION).findOne({user:new ObjectId(userId)})
     if(usercart){
-      db.get().collection(collection.CART_COLLECTION).updateOne({user: new ObjectId(userId)},{
+      let proExist= usercart.products.findIndex(products=>products.item == proId)
+      
+      console.log(proExist)
+      // if (proExist !==-1){
+      //   db.get().collection(collection.CART_COLLECTION).updateOne({'products.item': new ObjectId
+      //     (proId)
+      //   }, { $inc: { 'products.$.quantity': 1 } })
+
+      // }
+
+
+      // db.get().collection(collection.CART_COLLECTION).updateOne({user: new ObjectId(userId)},{
         
-          $push :{products: new ObjectId(proId) }
+      //     $push :{products: new ObjectId(proId) }
           
         
-      }).then((response)=>{
-        resolve()
-      })
+      // }).then((response)=>{
+      //   resolve()
+      // })
       
       }
 
@@ -57,7 +72,7 @@ module.exports = {
     else{
       const userobj ={
         user: new ObjectId(userId),
-        products:[new ObjectId(proId)]
+        products:[proObj]
       }
       db.get().collection(collection.CART_COLLECTION).insertOne(userobj).then((response)=>{
         resolve()

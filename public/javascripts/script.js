@@ -3,13 +3,20 @@
   function addTocart(proID){
 
 
+
     
     $.ajax({
       url:"/add-cart/" + proID,
       method:"get",
-      success:((Response)=>{
-        alert(Response)
-      })
+      success:(response)=>{
+
+        if(response.status){
+
+            
+        }
+      alert(response )
+
+      }
 
 
     })

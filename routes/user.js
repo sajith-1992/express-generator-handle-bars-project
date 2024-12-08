@@ -83,6 +83,8 @@ router.get('/add-cart/:proID',(req,res)=>{
   console.log("onclick working")
   userHelper.addToCart(req.params.id,req.session.user._id).then(()=>{
     //res.redirect('/')
+
+    res.json({status:true})
     
   })
 })
