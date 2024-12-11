@@ -65,13 +65,13 @@ module.exports = {
         
        $push:{products: [proObj]}
             
-    }
+    })
 
 
 
 
 
-      
+  }
    
    
 
@@ -85,7 +85,7 @@ module.exports = {
       //   resolve()
       // })
       
-      }
+}
 
 
     else{
@@ -97,7 +97,7 @@ module.exports = {
         resolve()
       })
     }
-    })
+  })
   },
    getuserproduct:(userId)=>{
 
@@ -107,38 +107,32 @@ return new Promise((resolve, reject) => {
     { 
       $match : {user: new ObjectId(userId)}
     },
-    {
-      $lookup:{
-        from:collection.PRODUCT_COLLECTION,
-        let:{prolist:'$products'},
-        pipeline:[
-          {
-            $match:{
-              $expr:{
-                $in:['$_id',"$$prolist"]
-              }
-            }
-          }
+    // {
+    //   $lookup:{
+    //     from:collection.PRODUCT_COLLECTION,
+    //     let:{prolist:'$products'},
+    //     pipeline:[
+    //             $in:['$_id',"$$prolist"]
+    //       {
+    //         $match:{
+    //           $expr:{
+    //           }
+    //         }
+    //       }
 
 
-        ],as: 'cartItems'
+    //     ],as: 'cartItems'
         
         
-      }
-    }
+    //   }
+    // }
   ]).toArray()
-  .then(cartItems => {
-    // If no items are found in the cart for the user
-    if (cartItems.length > 0) {
-      resolve(cartItems[0].cartItems);
-    } else {
-      resolve([]); // Empty cart case
-    }
-  })
-  .catch(error => {
-    reject(error); // In case of any errors
-  });
-});
+  .then((cartItems) =>{
+  console.log(cartItems[0].products)
+  }
+    )
+  }) 
+
 },
 cartcount:(userID)=>{
 
