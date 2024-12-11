@@ -47,7 +47,7 @@ module.exports = {
     let usercart = await db.get().collection(collection.CART_COLLECTION).findOne({user:new ObjectId(userId)})
     // console.log(usercart)
     if(usercart){
-    let proExit = usercart.products.findIndex(products=>products.item) 
+    let proExit = usercart.products.findIndex(product=> product.item==proId)  
     console.log(proExit)    
     if (proExit != -1) {
       db.get().collection(collection.CART_COLLECTION).updateOne(
@@ -63,7 +63,7 @@ module.exports = {
 
       db.get().collection(collection.CART_COLLECTION).updateOne({user: new ObjectId(userId)},{
         
-       $push:{products: [proObj]}
+       $push:{ products:[proObj]}
             
     })
 
@@ -106,29 +106,15 @@ return new Promise((resolve, reject) => {
   let cartItems=db.get().collection(collection.CART_COLLECTION).aggregate([
     { 
       $match : {user: new ObjectId(userId)}
-    },
-    // {
-    //   $lookup:{
-    //     from:collection.PRODUCT_COLLECTION,
-    //     let:{prolist:'$products'},
-    //     pipeline:[
-    //             $in:['$_id',"$$prolist"]
-    //       {
-    //         $match:{
-    //           $expr:{
-    //           }
-    //         }
-    //       }
-
-
-    //     ],as: 'cartItems'
-        
-        
-    //   }
-    // }
+    },{
+      $unwind : '$products'
+    }
+    
+    
   ]).toArray()
   .then((cartItems) =>{
-  console.log(cartItems[0].products)
+    
+  console.log(cartItems)
   }
     )
   }) 
