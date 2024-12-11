@@ -79,8 +79,12 @@ router.get('/cart',verifyLogIn,async(req,res)=>{
   res.render('user/cart',{cartproduct,user:req.session.user})
 })
 
-router.get('/add-cart/:proID',(req,res)=>{
-  console.log("onclick working")
+router.get('/add-cart/:id',(req,res)=>{
+  // console.log("onclick working")
+
+  // console.log(req.params.id)
+
+    
   userHelper.addToCart(req.params.id,req.session.user._id).then(()=>{
     //res.redirect('/')
 
