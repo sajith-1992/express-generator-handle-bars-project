@@ -45,33 +45,35 @@ module.exports = {
     } 
     return new Promise(async(resolve, reject) => {
     let usercart = await db.get().collection(collection.CART_COLLECTION).findOne({user:new ObjectId(userId)})
-    // console.log(usercart)
+  
     if(usercart){
-    let proExit = usercart.products.findIndex(product=> product.item==proId)  
+      console.log(usercart)
+
+      let proExit=usercart.products.findIndex(product=> product.item==proId)
+
     console.log(proExit)    
     if (proExit != -1) {
-      db.get().collection(collection.CART_COLLECTION).updateOne(
-        { 'products.item': new ObjectId(proId) }, // Ensure proId is a valid ObjectId string
-        {
-          $inc: { 'products.$.quantity': 1 } // Update the quantity of the matching product item
-        }
+       db.get().collection(collection.CART_COLLECTION).updateOne(
+         { 'products.item': new ObjectId(proId) }, // Ensure proId is a valid ObjectId string
+         {
+           $inc: { 'products.$.quantity': 1 } // Update the quantity of the matching product item
+         }
 
-      )
-
-      // console.log("hello")
-    }else{
+       ).then(()=>resolve())
+        
+     }else{
 
       db.get().collection(collection.CART_COLLECTION).updateOne({user: new ObjectId(userId)},{
         
-       $push:{ products:[proObj]}
+       $push:{ products: proObj}
             
-    })
+   }).then((response)=>resolve() )
 
 
 
+  //   console.log("no proid in  user cart")
 
-
-  }
+   }
    
    
 
@@ -91,11 +93,12 @@ module.exports = {
     else{
       const userobj ={
         user: new ObjectId(userId),
-        products:[proObj]
+        products: [proObj]
       }
       db.get().collection(collection.CART_COLLECTION).insertOne(userobj).then((response)=>{
         resolve()
       })
+      
     }
   })
   },

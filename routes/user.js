@@ -80,9 +80,9 @@ router.get('/cart',verifyLogIn,async(req,res)=>{
 })
 
 router.get('/add-cart/:id',(req,res)=>{
-  // console.log("onclick working")
+//  console.log("onclick working")
 
-  // console.log(req.params.id)
+//  console.log(req.params.id)
 
     
   userHelper.addToCart(req.params.id,req.session.user._id).then(()=>{
