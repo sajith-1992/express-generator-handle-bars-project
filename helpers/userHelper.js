@@ -108,10 +108,31 @@ return new Promise((resolve, reject) => {
   
   let cartItems=db.get().collection(collection.CART_COLLECTION).aggregate([
     { 
-      $match : {user: new ObjectId(userId)}
-    },{
+      $match : {user: new ObjectId(userId)}},
+      
+    {
       $unwind : '$products'
-    }
+     },
+
+     {
+
+        $project:{
+
+          item : '$products.item',
+          quantity:'$products.quantity'
+
+        }},
+
+
+      // {
+    //   $lookup:{
+    //     from:collection.PRODUCT_COLLECTION,
+    //     localField:'item',
+    //     foreignField:'_id ',
+    //     as:'products'
+
+    //   }
+    //  }
     
     
   ]).toArray()
