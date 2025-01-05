@@ -132,12 +132,12 @@ return new Promise((resolve, reject) => {
             as: "product",
           },
         },
-    //     {
-    //       $project:{
-    //         item:1,quantity:1,product:{ $: "$product" 
+        {
+          $project:{
+            item:1,quantity:1,product:{ $arrayElemAt:["$product",0]
 
-    //         }
-    //     }}
+            }
+        }}
     
     
   ]).toArray()
