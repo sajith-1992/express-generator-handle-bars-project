@@ -124,21 +124,27 @@ return new Promise((resolve, reject) => {
         }},
 
 
-      // {
-    //   $lookup:{
-    //     from:collection.PRODUCT_COLLECTION,
-    //     localField:'item',
-    //     foreignField:'_id ',
-    //     as:'products'
+        {
+          $lookup: {
+            from: collection.PRODUCT_COLLECTION,
+            localField:'item',
+            foreignField: "_id",
+            as: "product",
+          },
+        },
+    //     {
+    //       $project:{
+    //         item:1,quantity:1,product:{ $: "$product" 
 
-    //   }
-    //  }
+    //         }
+    //     }}
     
     
   ]).toArray()
   .then((cartItems) =>{
     
-  console.log(cartItems)
+    console.log(cartItems)
+  resolve(cartItems)
   }
     )
   }) 
